@@ -9,13 +9,7 @@ DESTINATION_BRANCH=$4
 
 if ! echo $SOURCE_REPO | grep '.git'
 then
-  if [[ -n "$SSH_PRIVATE_KEY" ]]
-  then
-    SOURCE_REPO="git@github.com:${SOURCE_REPO}.git"
-    GIT_SSH_COMMAND="ssh -v"
-  else
     SOURCE_REPO="https://github.com/${SOURCE_REPO}.git"
-  fi
 fi
 if ! echo $DESTINATION_REPO | grep -E '.git|@'
 then
