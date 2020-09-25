@@ -25,14 +25,18 @@ fi
 echo "SOURCE=$SOURCE_REPO:$SOURCE_BRANCH"
 echo "DESTINATION=$DESTINATION_REPO:$DESTINATION_BRANCH"
 
+echo "CLONING..."
 git clone "$SOURCE_REPO" /root/source --origin source && cd /root/source
+echo "Adding remote..."
 git remote add destination "$DESTINATION_REPO"
 
 # Pull all branches references down locally so subsequent commands can see them
+echo "Fetching from source..."
 git fetch source '+refs/heads/*:refs/heads/*' --update-head-ok
 
 # Print out all branches
 git --no-pager branch -a -vv
 
 #git push destination "${SOURCE_BRANCH}:${DESTINATION_BRANCH}" -f
-git push --tags
+echo "pushing to destination..."
+git push destination --tags
